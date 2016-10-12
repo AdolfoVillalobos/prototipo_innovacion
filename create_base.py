@@ -10,10 +10,12 @@ cantidad_dias = 2
 cantidad_trabajadores = 3
 terreno_x = 100
 terreno_y = 100
-cantidad_muestreado = 60*60*8/5
+paso_muestreo =5
+cantidad_muestreado = 60*60*8/paso_muestreo
 
 #Fechas
 fechainicio = date(2016,10,11)
+horainicio =datetime.datetime(2016, 10, 11, 8, 0)
 fechas = []
 for i in range(cantidad_dias):
 	delta = datetime.timedelta(days=1)
@@ -40,9 +42,12 @@ for k in range(cantidad_dias):
 			worksheet.write(0,col,item)
 			col+=1
 #Llenado ID,Nombre,Fecha y Horas
+		delta = datetime.timedelta(seconds=paso_muestreo)
 		for j in range(1,cantidad_muestreado):
+			horainicio+=delta
 			worksheet.write(j,0,ID[i])
 			worksheet.write(j,1,Nombres[i])
 			worksheet.write(j,2,fechas[k].strftime("%Y-%m-%d"))
-			worksheet.write(j,3,)
+			worksheet.write(j,3,horainicio.strftime("%H:%M:%S"))
 workbook.close()
+
