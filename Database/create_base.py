@@ -8,8 +8,6 @@ from datetime import date
 
 cantidad_dias = 2
 cantidad_trabajadores = 3
-terreno_x = 100
-terreno_y = 100
 paso_muestreo =5
 cantidad_muestreado = 60*60*8/paso_muestreo
 
