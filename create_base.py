@@ -9,8 +9,7 @@ from datetime import date
 cantidad_dias = 2
 cantidad_trabajadores = 3
 paso_muestreo =5
-cantidad_horas = 10
-cantidad_muestreado = 60*60*cantidad_horas/paso_muestreo
+cantidad_muestreado = 60*60*8/paso_muestreo
 
 #Fechas
 fechainicio = date(2016,10,11)

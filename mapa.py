@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-
+# Make a 9x9 grid...
 nrows, ncols = 21,21
 image = np.zeros((nrows,ncols))
 
