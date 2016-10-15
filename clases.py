@@ -12,6 +12,7 @@ class Trabajador:
 		self.lista_posiciones_y =[]
 
 
+
 	def calcular_productividad(self):
 		keys = self.productividades_diarias.keys()
 		suma = 0.0
