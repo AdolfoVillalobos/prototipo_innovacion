@@ -10,19 +10,16 @@ class Trabajador:
 		self.arbol_actual = []
 		self.lista_posiciones_x =[]
 		self.lista_posiciones_y =[]
-	def actualizar_productividades_diarias(self,dia,hora,produccion):
-		self.productividades_diarias[(dia,hora)] = produccion
+
+
 	def calcular_productividad(self):
 		keys = self.productividades_diarias.keys()
-		sum = 0.0
+		suma = 0.0
 		for i in keys:
-			sum += self.productividades_diarias[i]
-		sum = sum/n
+			suma += self.productividades_diarias[i]
+		suma = suma/n
+		self.productividad_promedio = sum
 		return (sum)
-	def actualizar_lista_posiciones(self,lista_x,lista_y):
-		self.lista_posiciones_x=lista_x
-		self.lista_posiciones_y=lista_y
-
 
 class Arbol:
 	def __init__(self,posx,posy):
