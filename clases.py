@@ -8,10 +8,9 @@ class Trabajador:
 		self.productividad_promedio = 0
 		self.productividades_diarias = dict()
 		self.arbol_actual = []
-		self.lista_posiciones_x =[]
-		self.lista_posiciones_y =[]
-
-
+		self.lista_posiciones_x =[self.posx]
+		self.lista_posiciones_y =[self.posy]
+	def calcular_productividades_hora(self):
 
 	def calcular_productividad(self):
 		keys = self.productividades_diarias.keys()

@@ -34,8 +34,14 @@ class BackEnd:
 	def calcular_productividades (self,hora,dia):
 		print "Las productividades han sido calculadas, para cada trabajador"
 	def calcular_promedios(self):
-		for i in trabajadores:
+		promedios_actuales = dict()
+		for i in self.trabajadores:
 			i.calcular_promedios()
+			promedios_actuales[i.ID] = i.productividad_promedio
+	def prediccion_a_tiempo_fijo(self,tiempo,n_horas_diaria,cantidad):
+		cuanto_produzco = 0
+		
+
 	
 
 direccion1 = "Database/database.xlsx"
