@@ -5,7 +5,7 @@ import time
 import datetime
 from datetime import date
 import random as rd
-import matplotlib.pyplot as plt
+
 
 
 
@@ -75,16 +75,18 @@ class BackEnd:
 		if cantidad < cuanto_produzco:
 			sobran_trabajadores=True
 			me_Falta = cantidad-cuanto_produzco
-			t_necesito = me_Falta/promb.
+			t_necesito = me_Falta/prom
 		return cuanto_produzco,t_necesito,sobran_trabajadores #Cuanto soy capaz de producir, cuantos trabajadores necesito y si me sobran o no
 	def lista_mejores_trabajadores(self):
 		result = [(i.ID,i.nombre,i.productividad_promedio) for i in self.trabajadores]
 		result = sorted(result,key=lambda x:x[2],reverse=True)
 		return result
 	def obtener_grafico_productividades(self,trabajador,dia):
+		import matplotlib.pyplot as plt
 		plt.figure()
 		x = (8,9,10,11,12,13,14,15,16,17)
 		z = self.trabajadores[trabajador].productividades_diarias[dia]
+		z[4]=0
 		plt.bar(x, z, 1, color="blue")
 		plt.show()
 #Esto es para graficar las posiciones en cada instante de tiempo, del trabajador i. la gracia es que no pide la hora, porque en la rutina cargar_posicion ya esta actualizada esa info
@@ -96,7 +98,7 @@ class BackEnd:
 	def crear_productividades_juguete(self):
 		for l in range(self.num_trabajadores):
 			for j in range(self.dias):
-				tiempos = [30+rd.randint(-2,3) for i in range(10)]
+				tiempos = [30+rd.randint(-3,3) for i in range(10)]
 				self.productividades_juguete [(j,l)] = tiempos
 		#Ahora darselas a cada trabajador
 		for k in self.productividades_juguete.keys():
