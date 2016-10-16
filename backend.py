@@ -5,11 +5,6 @@ import time
 import datetime
 from datetime import date
 import random as rd
-
-
-
-
-
 class BackEnd:
 	def __init__(self,database, direccion_trabajadores):
 		self.dias = 2
@@ -45,7 +40,7 @@ class BackEnd:
 			x,y = self.parsed_database[(dia,i.ID)]['Pos_X'][m], self.parsed_database[(dia,i.ID)]['Pos_Y'][m]
 			i.posx = x
 			i.posy = y
-		print("Se han cargado las posiciones")
+		print "Se han cargado las posiciones" 
 	def calcular_productividades_individual(self,dia,lista,trabajador):
 		self.trabajadores[trabajador].anadir_dia_de_productividad(dia,lista)
 	
@@ -81,15 +76,14 @@ class BackEnd:
 		result = [(i.ID,i.nombre,i.productividad_promedio) for i in self.trabajadores]
 		result = sorted(result,key=lambda x:x[2],reverse=True)
 		return result
-	def lista_trabajadores(self):
-		result = {i.id: i.nombre for i in self.trabajadores}
-		return result
 	def obtener_grafico_productividades(self,trabajador,dia):
 		import matplotlib.pyplot as plt
 		plt.figure()
 		x = (8,9,10,11,12,13,14,15,16,17)
 		z = self.trabajadores[trabajador].productividades_diarias[dia]
-		plt.bar(x, z, 1, color="blue")
+		plt.bar(x, z, 1, color="green")
+		plt.xlabel('Hora' )
+		plt.ylabel('Kilogramos por hora')
 		plt.show()
 #Esto es para graficar las posiciones en cada instante de tiempo, del trabajador i. la gracia es que no pide la hora, porque en la rutina cargar_posicion ya esta actualizada esa info
 	def obtener_posicion(self,i):
