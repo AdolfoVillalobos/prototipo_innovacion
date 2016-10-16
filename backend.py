@@ -76,6 +76,9 @@ class BackEnd:
 		result = [(i.ID,i.nombre,i.productividad_promedio) for i in self.trabajadores]
 		result = sorted(result,key=lambda x:x[2],reverse=True)
 		return result
+	def lista_trabajadores(self):
+ 		result = {i.nombre: i.ID for i in self.trabajadores}
+ 		return result
 	def obtener_grafico_productividades(self,trabajador,dia):
 		import matplotlib.pyplot as plt
 		plt.figure()
