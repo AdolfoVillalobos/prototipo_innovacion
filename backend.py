@@ -91,7 +91,7 @@ class BackEnd:
 	def obtener_grafico_productividades(self,trabajador,dia):
 		import matplotlib.pyplot as plt
 		fig = plt.figure()
-		plt.title('Productividad por hora \n'+self.trabajadores[dia].nombre+' dia '+str(dia))
+		plt.title('Productividad por hora \n'+self.trabajadores[trabajador].nombre+' dia '+str(dia))
 		x = (8,9,10,11,12,13,14,15,16,17)
 		z = self.trabajadores[trabajador].productividades_diarias[dia]
 		plt.bar(x, z, 1, color="green")
