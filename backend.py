@@ -62,20 +62,24 @@ class BackEnd:
 		return suma
 
 	def prediccion_a_cantidad_fija(self,dias,n_horas_diaria,cantidad):
-		sobran_trabajadores = False
 		cuanto_produzco = 0
 		coef = dias*n_horas_diaria
 		prom =self.calcular_promedio_total()
 		for i in self.trabajadores:
 			cuanto_produzco+=i.productividad_promedio*coef
-		if cantidad >=cuanto_produzco:
+		if cantidad >cuanto_produzco:
 			me_Falta = cantidad-cuanto_produzco
 			t_necesito = me_Falta/prom
+			caso=0
+		if cantidad = cuanto_produzco:
+			me_Falta = cantidad-cuanto_produzco
+			t_necesito = me_Falta/prom
+			caso=1			
 		if cantidad < cuanto_produzco:
-			sobran_trabajadores=True
 			me_Falta = cantidad-cuanto_produzco
 			t_necesito = me_Falta/prom
-		return me_Falta,t_necesito,sobran_trabajadores #Cuanto soy capaz de producir, cuantos trabajadores necesito y si me sobran o no
+			caso=2
+		return me_Falta,t_necesito,caso #Cuanto soy capaz de producir, cuantos trabajadores necesito y si me sobran o no
 
 	def lista_mejores_trabajadores(self):
 		result = [(i.ID,i.nombre,i.productividad_promedio) for i in self.trabajadores]
