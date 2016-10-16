@@ -18,6 +18,7 @@ class Trabajador:
 		self.productividades_diarias[dia]=lista
 	def obtener_productividades_diarias(self,dia):
 		print "ouch"
+	#Hay que reformular las funciones, dependiendo del algoritmo de la cata
 	def calcular_productividad(self):
 		n = len(self.productividades_diarias)
 		keys = self.productividades_diarias.keys()
