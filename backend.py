@@ -86,7 +86,6 @@ class BackEnd:
 		plt.figure()
 		x = (8,9,10,11,12,13,14,15,16,17)
 		z = self.trabajadores[trabajador].productividades_diarias[dia]
-		z[4]=0
 		plt.bar(x, z, 1, color="blue")
 		plt.show()
 #Esto es para graficar las posiciones en cada instante de tiempo, del trabajador i. la gracia es que no pide la hora, porque en la rutina cargar_posicion ya esta actualizada esa info
@@ -99,6 +98,7 @@ class BackEnd:
 		for l in range(self.num_trabajadores):
 			for j in range(self.dias):
 				tiempos = [30+rd.randint(-3,3) for i in range(10)]
+				tiempos[4]=0
 				self.productividades_juguete [(j,l)] = tiempos
 		#Ahora darselas a cada trabajador
 		for k in self.productividades_juguete.keys():
