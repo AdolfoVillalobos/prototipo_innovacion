@@ -19,6 +19,7 @@ class BackEnd:
 		self.direccion_trabajadores = direccion_trabajadores
 		self.trabajadores = []
 		self.productividades_juguete = dict()
+#Preliminares. parse_database entrega una base manejable en python, a partir de los excel
 	def parse_database(self):
 		dicti = dict()
 		excel_base = pd.ExcelFile(self.database)
@@ -36,6 +37,7 @@ class BackEnd:
 		for i in range(numero):
 			trabajadorcito = clases.Trabajador(ID[i],str(Nombre[i]),lista_posiciones[i][0],lista_posiciones[i][1])
 			self.trabajadores.append(trabajadorcito)
+	#Esta rutina se ejecuta todo el rato. Va actualizando las posiciones	
 	def cargar_posiciones(self,hora,dia):
 		for i in self.trabajadores:	
 			str_hora = [str(x) for x in self.parsed_database[(dia,i.ID)]['Hora']]
@@ -46,17 +48,35 @@ class BackEnd:
 		print "Se han cargado las posiciones" 
 	def calcular_productividades_individual(self,dia,lista,trabajador):
 		self.trabajadores[trabajador].anadir_dia_de_productividad(dia,lista)
+	
+#Cosas bonitas el Modelo:
 	def calcular_promedios(self):
 		promedios_actuales = dict()
 		for i in self.trabajadores:
 			i.calcular_productividad()
 			promedios_actuales[i.ID] = i.productividad_promedio
+	def calcular_promedio_total(self):
+		suma = 0.0
+		for i in self.trabajadores:
+			suma+=i.productividad_promedio
+		suma = suma/self.num_trabajadores
+		return suma
+
 	def prediccion_a_cantidad_fija(self,dias,n_horas_diaria,cantidad):
+		sobran_trabajadores = False
 		cuanto_produzco = 0
 		coef = dias*n_horas_diaria
+		prom =self.calcular_promedio_total()
 		for i in self.trabajadores:
 			cuanto_produzco+=i.productividad_promedio*coef
-		return cuanto_produzco
+		if cantidad >=cuanto_produzco:
+			me_Falta = cantidad-cuanto_produzco
+			t_necesito = me_Falta/prom
+		if cantidad < cuanto_produzco:
+			sobran_trabajadores=True
+			me_Falta = cantidad-cuanto_produzco
+			t_necesito = me_Falta/promb.
+		return cuanto_produzco,t_necesito,sobran_trabajadores #Cuanto soy capaz de producir, cuantos trabajadores necesito y si me sobran o no
 	def lista_mejores_trabajadores(self):
 		result = [(i.ID,i.nombre,i.productividad_promedio) for i in self.trabajadores]
 		result = sorted(result,key=lambda x:x[2],reverse=True)
@@ -67,6 +87,8 @@ class BackEnd:
 		z = self.trabajadores[trabajador].productividades_diarias[dia]
 		plt.bar(x, z, 1, color="blue")
 		plt.savefig(nombre_archivo)
+
+#Esto es para graficar las posiciones en cada instante de tiempo, del trabajador i. la gracia es que no pide la hora, porque en la rutina cargar_posicion ya esta actualizada esa info
 	def obtener_posicion(self,i):
 		x = self.trabajadores[i].posx
 		y = self.trabajadores[i].posy
