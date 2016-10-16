@@ -75,7 +75,8 @@ class BackEnd:
 			sobran_trabajadores=True
 			me_Falta = cantidad-cuanto_produzco
 			t_necesito = me_Falta/prom
-		return cuanto_produzco,t_necesito,sobran_trabajadores #Cuanto soy capaz de producir, cuantos trabajadores necesito y si me sobran o no
+		return me_Falta,t_necesito,sobran_trabajadores #Cuanto soy capaz de producir, cuantos trabajadores necesito y si me sobran o no
+
 	def lista_mejores_trabajadores(self):
 		result = [(i.ID,i.nombre,i.productividad_promedio) for i in self.trabajadores]
 		result = sorted(result,key=lambda x:x[2],reverse=True)
@@ -107,13 +108,11 @@ class BackEnd:
  			dicti['Productividad Promedio'] = i.productividad_promedio
  			diccionarios.append(dicti)
  		return diccionarios
-
 #Esto es para graficar las posiciones en cada instante de tiempo, del trabajador i. la gracia es que no pide la hora, porque en la rutina cargar_posicion ya esta actualizada esa info
 	def obtener_posicion(self,i):
 		x = self.trabajadores[i].posx
 		y = self.trabajadores[i].posy
 		return (x,y)
-
 #Modelo Juguete
 	def crear_productividades_juguete(self):
 		for l in range(self.num_trabajadores):
