@@ -35,5 +35,3 @@ class Arbol:
 		self.pos = []
 
 
-t = Trabajador(0,0,0,0)
-t.anadir_dia_de_productividad(0,tiempos)
