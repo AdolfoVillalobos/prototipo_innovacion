@@ -45,7 +45,7 @@ class BackEnd:
 			x,y = self.parsed_database[(dia,i.ID)]['Pos_X'][m], self.parsed_database[(dia,i.ID)]['Pos_Y'][m]
 			i.posx = x
 			i.posy = y
-		print "Se han cargado las posiciones" 
+		print("Se han cargado las posiciones")
 	def calcular_productividades_individual(self,dia,lista,trabajador):
 		self.trabajadores[trabajador].anadir_dia_de_productividad(dia,lista)
 	
@@ -80,6 +80,9 @@ class BackEnd:
 	def lista_mejores_trabajadores(self):
 		result = [(i.ID,i.nombre,i.productividad_promedio) for i in self.trabajadores]
 		result = sorted(result,key=lambda x:x[2],reverse=True)
+		return result
+	def lista_trabajadores(self):
+		result = {i.id: i.nombre for i in self.trabajadores}
 		return result
 	def obtener_grafico_productividades(self,trabajador,dia):
 		import matplotlib.pyplot as plt
