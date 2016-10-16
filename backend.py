@@ -81,13 +81,12 @@ class BackEnd:
 		result = [(i.ID,i.nombre,i.productividad_promedio) for i in self.trabajadores]
 		result = sorted(result,key=lambda x:x[2],reverse=True)
 		return result
-	def obtener_grafico_productividades(self,trabajador,dia,nombre_archivo):
+	def obtener_grafico_productividades(self,trabajador,dia):
 		plt.figure()
 		x = (8,9,10,11,12,13,14,15,16,17)
 		z = self.trabajadores[trabajador].productividades_diarias[dia]
 		plt.bar(x, z, 1, color="blue")
-		plt.savefig(nombre_archivo)
-
+		plt.show()
 #Esto es para graficar las posiciones en cada instante de tiempo, del trabajador i. la gracia es que no pide la hora, porque en la rutina cargar_posicion ya esta actualizada esa info
 	def obtener_posicion(self,i):
 		x = self.trabajadores[i].posx
