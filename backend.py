@@ -34,7 +34,7 @@ class BackEnd:
 		Salario = dt['Salario']
 		Contrato = dt['Tipo Contrato']
 		for i in range(numero):
-			trabajadorcito = clases.Trabajador(ID[i],str(Nombre[i]),lista_posiciones[i][0],lista_posiciones[i][1],str(Fechas[i]),str(Contrato[i]),int(Salario[i]),int(Rut[i]))
+			trabajadorcito = clases.Trabajador(ID[i],str(Nombre[i]),lista_posiciones[i][0],lista_posiciones[i][1],Fechas[i],str(Contrato[i]),int(Salario[i]),int(Rut[i]))
 			self.trabajadores.append(trabajadorcito)
 	#Esta rutina se ejecuta todo el rato. Va actualizando las posiciones	
 	def cargar_posiciones(self,hora,dia):
@@ -103,7 +103,7 @@ class BackEnd:
 			dicti['Rut'] = i.rut
 			dicti['Salario'] = i.salario
 			dicti['Tipo Contrato'] = i.contrato
-			dicti['Fecha Contratacion'] = i.fecha
+			dicti['Fecha Contratacion'] = i.fecha.strftime("%Y-%m-%d")
  			dicti['Productividad Promedio'] = i.productividad_promedio
  			diccionarios.append(dicti)
  		return diccionarios
