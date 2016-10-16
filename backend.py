@@ -29,8 +29,12 @@ class BackEnd:
 		dt = excel_trabajadores.parse("Sheet1")
 		ID = dt['ID']
 		Nombre = dt["Nombre"]
+		Fechas = dt['Fecha Ingreso']
+		Rut=dt['Rut']
+		Salario = dt['Salario']
+		Contrato = dt['Tipo Contrato']
 		for i in range(numero):
-			trabajadorcito = clases.Trabajador(ID[i],str(Nombre[i]),lista_posiciones[i][0],lista_posiciones[i][1])
+			trabajadorcito = clases.Trabajador(ID[i],str(Nombre[i]),lista_posiciones[i][0],lista_posiciones[i][1],str(Fechas[i]),str(Contrato[i]),int(Salario[i]),int(Rut[i]))
 			self.trabajadores.append(trabajadorcito)
 	#Esta rutina se ejecuta todo el rato. Va actualizando las posiciones	
 	def cargar_posiciones(self,hora,dia):
@@ -81,28 +85,46 @@ class BackEnd:
  		return result
 	def obtener_grafico_productividades(self,trabajador,dia):
 		import matplotlib.pyplot as plt
-		plt.figure()
+		fig = plt.figure()
+		plt.title('Productividad por hora \n'+self.trabajadores[dia].nombre+' dia '+str(dia))
 		x = (8,9,10,11,12,13,14,15,16,17)
 		z = self.trabajadores[trabajador].productividades_diarias[dia]
 		plt.bar(x, z, 1, color="green")
 		plt.xlabel('Hora' )
 		plt.ylabel('Kilogramos por hora')
+		fig.canvas.set_window_title('Grafico de Productividad') 
 		plt.show()
+	def tabla_trabajadores(self):
+		diccionarios = []
+		for i in self.trabajadores:
+			dicti = dict()
+			dicti['ID']=i.ID
+			dicti['Nombre']=i.nombre
+			dicti['Rut'] = i.rut
+			dicti['Salario'] = i.salario
+			dicti['Tipo Contrato'] = i.contrato
+			dicti['Fecha Contratacion'] = i.fecha
+ 			dicti['Productividad Promedio'] = i.productividad_promedio
+ 			diccionarios.append(dicti)
+ 		return diccionarios
+
 #Esto es para graficar las posiciones en cada instante de tiempo, del trabajador i. la gracia es que no pide la hora, porque en la rutina cargar_posicion ya esta actualizada esa info
 	def obtener_posicion(self,i):
 		x = self.trabajadores[i].posx
 		y = self.trabajadores[i].posy
 		return (x,y)
+
 #Modelo Juguete
 	def crear_productividades_juguete(self):
 		for l in range(self.num_trabajadores):
 			for j in range(self.dias):
-				tiempos = [30+rd.randint(-3,3) for i in range(10)]
+				tiempos = [30+rd.randint(-3,2) for i in range(10)]
 				tiempos[4]=0
 				self.productividades_juguete [(j,l)] = tiempos
 		#Ahora darselas a cada trabajador
 		for k in self.productividades_juguete.keys():
 			self.trabajadores[k[1]].productividades_diarias[k[0]]=self.productividades_juguete[k]
+
 direccion1 = "Database/database.xlsx"
 direccion2 = "Database/trabajadores.xls"
 posiciones = ((3,5),(3,33),(3,26))

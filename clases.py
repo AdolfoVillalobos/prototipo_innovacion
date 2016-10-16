@@ -4,11 +4,15 @@ import random as rd
 tiempos = [10+rd.randint(-2,2) for i in range(10)]
 
 class Trabajador:
-	def __init__(self,ID,nombre,posx,posy):
+	def __init__(self,ID,nombre,posx,posy,fecha,contrato,salario,rut):
 		self.ID=ID
 		self.nombre=nombre
 		self.posx=posx
 		self.posy=posy
+		self.fecha=fecha
+		self.contrato=contrato
+		self.salario=salario
+		self.rut=rut
 		self.productividad_promedio = 10
 		self.productividades_diarias = dict()
 		self.arbol_actual = []
